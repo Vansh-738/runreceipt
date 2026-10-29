@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>Run comparison · runreceipt</title>
+<style>
+:root{color-scheme:light;--ink:#192b37;--muted:#526775;--line:#dce4e8;--accent:#087f73}
+*{box-sizing:border-box}body{margin:0;background:#f4f7f8;color:var(--ink);font:15px/1.6 system-ui,sans-serif}
+main{max-width:1120px;margin:48px auto;padding:0 24px}.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:700}
+h1{font-size:40px;line-height:1.15;letter-spacing:-.04em;margin:12px 0}h2{font-size:20px;margin:0 0 16px}.intro{color:var(--muted);max-width:720px}
+.cards{display:flex;gap:16px;margin:28px 0;flex-wrap:wrap}.card{background:white;border:1px solid var(--line);border-radius:12px;padding:18px 24px;flex:1;min-width:220px}.card strong{font-size:clamp(20px,2.5vw,27px);display:block;overflow-wrap:anywhere}.card span{color:var(--muted)}
+section{background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin:20px 0}.scroll{overflow:auto}table{width:100%;min-width:580px;table-layout:fixed;border-collapse:collapse}th:nth-child(1),th:nth-child(2){width:20%}th{text-align:left;background:#f4f7f8;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}td,th{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}td{overflow-wrap:anywhere;white-space:pre-wrap}td:nth-child(n+2){font:12px/1.6 ui-monospace,monospace}footer{color:var(--muted);font-size:13px;margin:24px 0}li{margin:8px 0}@media(max-width:600px){main{margin:24px auto;padding:0 14px}h1{font-size:32px}section{padding:16px}}
+</style><main><div class="eyebrow">runreceipt / comparison</div><h1>What changed between runs?</h1>
+<p class="intro">Recorded differences in the inputs and outcome of two Python commands. A difference is a lead to investigate, not proof that it caused the result.</p>
+<div class="cards"><div class="card"><span>Earlier run</span><strong>e61f4b6561a4</strong></div><div class="card"><span>Later run</span><strong>48a9b5f186cf</strong></div><div class="card"><span>Recorded differences</span><strong>3</strong></div></div>
+<section><h2>Starting inputs and outcome</h2><div class="scroll"><table><thead><tr><th>Area</th><th>Name</th><th>Earlier</th><th>Later</th></tr></thead><tbody><tr><td>outcome</td><td>exit_code</td><td>0</td><td>1</td></tr><tr><td>files</td><td>data.json</td><td>sha256: e00c558d50fd</td><td>sha256: 2cfaa7bbf60c</td></tr><tr><td>environment</td><td>MAX_ITEMS</td><td>&quot;set (earlier value)&quot;</td><td>&quot;set (different value)&quot;</td></tr></tbody></table></div></section>
+<section><h2>Files changed during execution</h2><div class="scroll"><table><thead><tr><th>Run</th><th>File</th><th>Change</th></tr></thead><tbody><tr><td colspan="3">No final content changes in tracked files.</td></tr></tbody></table></div></section>
+<section><h2>Capture notes</h2><ul><li>Both captures are complete and their environment fingerprints are comparable.</li></ul></section><footer>Generated locally by runreceipt. No scripts, external fonts or network resources are needed to view this report.</footer></main></html>
