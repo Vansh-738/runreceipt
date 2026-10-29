@@ -97,8 +97,12 @@ def main(argv: list[str] | None = None) -> int:
                 output = html_report(result)
             else:
                 output = text_report(result)
-            sys.stdout.write(output)
-            sys.stdout.flush()
+            if args.format == "html" and hasattr(sys.stdout, "buffer"):
+                sys.stdout.buffer.write(output.encode("utf-8"))
+                sys.stdout.buffer.flush()
+            else:
+                sys.stdout.write(output)
+                sys.stdout.flush()
             return int(args.check and has_differences(result))
         if args.action == "show":
             print(

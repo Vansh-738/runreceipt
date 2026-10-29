@@ -90,7 +90,11 @@ def validate(data: object) -> dict:
         raise ReceiptError("invalid receipt identifier")
     try:
         timestamp = datetime.fromisoformat(data["started_at"])
-        if timestamp.tzinfo is None or any(ord(c) < 32 for c in data["started_at"]):
+        if (
+            timestamp.tzinfo is None
+            or not data["started_at"].isascii()
+            or any(ord(c) < 32 for c in data["started_at"])
+        ):
             raise ValueError
     except ValueError as error:
         raise ReceiptError("invalid receipt timestamp") from error

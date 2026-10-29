@@ -6,12 +6,12 @@ from html import escape
 
 def printable(value: object) -> str:
     if value is None:
-        return "—"
+        return "-"
     return json.dumps(value, ensure_ascii=True, sort_keys=True)
 
 
 def text_report(result: dict) -> str:
-    lines = [f"{result['before']} → {result['after']}"]
+    lines = [f"{result['before']} -> {result['after']}"]
     for change in result["changes"]:
         if change["area"] == "files":
             state = (
@@ -24,7 +24,7 @@ def text_report(result: dict) -> str:
             lines.append(f"files: {change['name']!a} {state}")
         else:
             lines.append(
-                f"{change['area']}: {change['name']!a}: {printable(change['before'])} → {printable(change['after'])}"
+                f"{change['area']}: {change['name']!a}: {printable(change['before'])} -> {printable(change['after'])}"
             )
     if result["selection_changed"]:
         lines.append(

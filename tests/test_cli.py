@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -14,11 +15,12 @@ class CliTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
 
-    def cli(self, *args):
+    def cli(self, *args, env=None):
         return subprocess.run(
             [sys.executable, "-m", "runreceipt", "--root", str(self.root), *args],
             capture_output=True,
             check=False,
+            env=env,
         )
 
     def test_run_preserves_stdout_and_exit_status_and_can_be_listed(self):
@@ -57,3 +59,14 @@ class CliTests(unittest.TestCase):
             ("run", "--track", "missing", "--", "-c", "pass"),
         ]:
             self.assertEqual(self.cli(*args).returncode, 2)
+
+    def test_diff_handles_legacy_console_encoding_and_html_stays_utf8(self):
+        for name in ["a.json", "b.json"]:
+            (self.root / name).write_text(json.dumps(sample()), encoding="utf-8")
+        env = dict(os.environ, PYTHONIOENCODING="cp1252")
+        text = self.cli("diff", "a.json", "b.json", env=env)
+        self.assertEqual(text.returncode, 0, text.stderr)
+        text.stdout.decode("ascii")
+        html = self.cli("diff", "a.json", "b.json", "--format", "html", env=env)
+        self.assertEqual(html.returncode, 0, html.stderr)
+        self.assertIn("Run comparison · runreceipt", html.stdout.decode("utf-8"))
