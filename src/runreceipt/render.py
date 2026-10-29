@@ -110,7 +110,7 @@ def html_report(result: dict) -> str:
         if any(value is None for value in result["mutations"].values())
         else '<tr><td colspan="3">No final content changes in tracked files.</td></tr>'
     )
-    return (
+    output = (
         """<!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
@@ -130,3 +130,5 @@ section{background:white;border:1px solid var(--line);border-radius:14px;padding
 <section><h2>Files changed during execution</h2><div class="scroll"><table><thead><tr><th>Run</th><th>File</th><th>Change</th></tr></thead><tbody>{"".join(mutation_rows) or mutation_empty}</tbody></table></div></section>
 <section><h2>Capture notes</h2><ul>{note_html}</ul></section><footer>Generated locally by runreceipt. No scripts, external fonts or network resources are needed to view this report.</footer></main></html>"""
     )
+
+    return output.encode("utf-8", errors="backslashreplace").decode("utf-8")

@@ -120,3 +120,10 @@ class CompareTests(unittest.TestCase):
             value[field] = "bad\x1b[31m"
             with self.assertRaises(ReceiptError):
                 validate(value)
+
+    def test_html_can_render_undecodable_filename_bytes(self):
+        before, after = sample(), sample()
+        after["inputs"]["files"]["bad-\udcff.txt"] = {"sha256": "a" * 64, "size": 1}
+        output = html_report(compare(before, after))
+        output.encode("utf-8")
+        self.assertIn("bad-\\udcff.txt", output)
